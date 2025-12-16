@@ -14,7 +14,7 @@ from pathlib import Path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src'))
 
-from config import TRAINED_WEIGHTS, ROLLING_Z_WINDOW, INITIAL_CAPITAL, DCA_MONTHLY_AMOUNT, DCA_NUM_MONTHS
+from config import TRAINED_WEIGHTS, ROLLING_Z_WINDOW, INITIAL_CAPITAL, DCA_MONTHLY_AMOUNT, DCA_NUM_MONTHS, TEST_DATA_PATH
 from strategies.quant_rf import load_btc_data, compute_factors, rolling_standardize, weights_to_positions, backtest
 
 # Set Chinese font
@@ -25,7 +25,7 @@ def load_and_prepare_data():
     """Load test data and compute all three strategies"""
     
     # Load data
-    df = pd.read_csv('data/bitcoin_test_2023_2024 copy.csv')
+    df = pd.read_csv(TEST_DATA_PATH)
     df['date'] = pd.to_datetime(df['Start'])
     df = df.sort_values('date').reset_index(drop=True)
     
@@ -55,7 +55,7 @@ def load_and_prepare_data():
         dca_portfolio.append(portfolio_value)
     
     # Quant Strategy
-    btc_df = load_btc_data(Path('data/bitcoin_test_2023_2024 copy.csv'))
+    btc_df = load_btc_data(TEST_DATA_PATH)
     btc_df, factor_cols = compute_factors(btc_df)
     btc_df, z_cols = rolling_standardize(btc_df, factor_cols, window=ROLLING_Z_WINDOW)
     positions = weights_to_positions(btc_df, z_cols, TRAINED_WEIGHTS, max_position=1.0)
@@ -176,7 +176,7 @@ def create_animated_gif():
         frames.append(frames[-1])
     
     # Save as GIF
-    output_path = 'visualization/portfolio_value_test_animated.gif'
+    output_path = 'portfolio_value_test_animated.gif'
     print(f"Saving GIF to {output_path}...")
     imageio.mimsave(output_path, frames, fps=10, loop=0)
     
