@@ -20,7 +20,8 @@ from config import (
     OPTIMIZATION_STEPS,
     OPTIMIZATION_STEP_SIZE,
     RISK_FREE_RATE_ANNUAL,
-    DAYS_PER_YEAR
+    DAYS_PER_YEAR,
+    INITIAL_CAPITAL
 )
 from utils import load_bitcoin_data
 
@@ -342,7 +343,6 @@ if __name__ == "__main__":
     print(f"Best Sharpe: {best_sharpe:.4f}")
 
     # ==== 6.3 最终回测并输出 final value (USD) ====
-    INITIAL_CAPITAL = 12_500.0
     final_pos = weights_to_positions(df, z_cols, best_w)
     final_res = backtest(df, final_pos, tc_bps=5.0)
     final_value = INITIAL_CAPITAL * (1.0 + final_res['cum_return'])
@@ -387,7 +387,6 @@ def run(retrain: bool = False) -> dict:
         best_w = TRAINED_WEIGHTS
 
     # Final backtest
-    INITIAL_CAPITAL = 12_500.0
     final_pos = weights_to_positions(df, z_cols, best_w)
     final_res = backtest(df, final_pos, tc_bps=5.0)
     final_value = INITIAL_CAPITAL * (1.0 + final_res['cum_return'])

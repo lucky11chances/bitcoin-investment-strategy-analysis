@@ -24,7 +24,7 @@ VALID_DATA_PATH = DATA_DIR / "bitcoin_valid_2021_2022 copy.csv"
 # Financial Parameters
 # =========================
 # Initial capital for HODL strategy
-INITIAL_CAPITAL = 12_500.0
+INITIAL_CAPITAL = 13_000.0
 
 # DCA parameters
 DCA_MONTHLY_AMOUNT = 1_000.0
