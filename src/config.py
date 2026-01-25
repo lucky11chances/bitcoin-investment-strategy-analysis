@@ -8,7 +8,7 @@ from pathlib import Path
 # =========================
 # Directory Paths
 # =========================
-# PROJECT_ROOT 现在指向项目根目录（src/ 的上一级）
+# PROJECT_ROOT now points to project root (parent of src/)
 PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 DOCS_DIR = PROJECT_ROOT / "docs"

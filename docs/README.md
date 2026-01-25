@@ -1,284 +1,271 @@
 # Bitcoin Investment Strategies: HODL vs DCA vs Quantitative
 
-比特币投资策略对比分析项目，实现并对比三种经典投资策略在2010-2024年的表现。
+Comparative analysis project implementing and comparing the performance of three classic investment strategies from 2010 to 2024.
 
-## 📊 策略概览
+## 📊 Strategy Overview
 
-### 1. HODL策略 (Buy and Hold)
-一次性投入$13,000，长期持有不操作。
+### 1. HODL Strategy (Buy and Hold)
+One-time investment of $13,000, held long-term without operation.
 
-### 2. DCA策略 (Dollar-Cost Averaging)
-每月定投$1,000，共13个月（总投资$13,000）。
+### 2. DCA Strategy (Dollar-Cost Averaging)
+Monthly fixed investment of $1,000 for 13 months (Total investment $13,000).
 
-### 3. Quantitative策略
-基于10个技术因子的量化交易系统，通过随机游走优化权重。
+### 3. Quantitative Strategy
+Quantitative trading system based on 10 technical factors, optimizing weights via random walk.
 
-## 📈 核心结果
+## 📈 Core Results
 
-### 训练集 (2010-2020)
-| 策略 | Sharpe Ratio | 最终价值 | 最大回撤 |
-|------|-------------|---------|------|
+### Training Set (2010-2020)
+| Strategy | Sharpe Ratio | Final Value | Max Drawdown |
+|----------|-------------|-------------|--------------|
 | HODL | 1.70 | $5.52B | -93.07% |
 | DCA | 1.78 | $2.31B | -93.07% |
 | Quant | 1.98 | $2.76B | - |
 
-### 测试集 (2023-2024)
-| 策略 | Sharpe Ratio | 收益率 | 最终价值 |
-|------|-------------|--------|------|
+### Test Set (2023-2024)
+| Strategy | Sharpe Ratio | Return | Final Value |
+|----------|-------------|--------|-------------|
 | HODL | 2.03 | +273% | $48,457 |
 | DCA | 3.04 | +141% | $31,328 |
 | Quant | 1.08 | +45% | $18,883 |
 
-**关键发现**: 量化策略过拟合明显，测试集表现远低于训练集。
+**Key Finding**: The quantitative strategy shows significant overfitting, with test set performance far below the training set.
 
-### 📊 量化策略交易统计
+### 📊 Quantitative Strategy Trading Statistics
 
-#### 训练集 (2010-2020)
-- **总交易次数**: 2,783次
-- **交易频率**: 76.73% (平均每1.3天交易一次)
-- **每年交易**: 280.3次
-- **平均交易规模**: 14.4%仓位变动
-- **总换手率**: 40,417.9%
+#### Training Set (2010-2020)
+- **Total Trades**: 2,783
+- **Trade Frequency**: 76.73% (Avg every 1.3 days)
+- **Annual Trades**: 280.3
+- **Avg Trade Size**: 14.4% position change
+- **Total Turnover**: 40,417.9%
 
-#### 测试集 (2023-2024)  
-- **总交易次数**: 296次
-- **交易频率**: 80.87% (平均每1.2天交易一次)
-- **每年交易**: 295.4次
-- **平均交易规模**: 16.4%仓位变动
-- **总换手率**: 4,883.3%
+#### Test Set (2023-2024)
+- **Total Trades**: 296
+- **Trade Frequency**: 80.87% (Avg every 1.2 days)
+- **Annual Trades**: 295.4
+- **Avg Trade Size**: 16.4% position change
+- **Total Turnover**: 4,883.3%
 
-**策略特征**: 高频交易策略，交易成本对收益有显著影响。
+**Strategy Characteristics**: High-frequency trading strategy where transaction costs significantly impact returns.
 
-## 🗂️ 项目结构
+## 🗂️ Project Structure
 
 ```
 bitcoin-investment-strategies/
-├── src/                             # 源代码文件夹
-│   ├── strategies/                  # 策略实现
-│   │   ├── __init__.py             # 策略模块初始化
-│   │   ├── hodl.py                 # HODL策略实现
-│   │   ├── dca.py                  # DCA策略实现（训练集）
-│   │   ├── dca_test.py             # DCA测试集评估
-│   │   ├── quant_rf.py             # 量化策略实现（训练集）
-│   │   └── quant_test.py           # 量化测试集评估
-│   ├── __init__.py                 # 包初始化
-│   ├── config.py                   # 全局配置（路径、参数、常量）
-│   ├── metrics.py                  # 统一的性能指标计算
-│   ├── utils.py                    # 通用工具函数
-│   └── main.py                     # 主程序（训练+测试+交叉验证）
-├── data/                            # 数据文件夹
-│   ├── bitcoin_train_2010_2020 copy.csv  # 训练集数据
-│   ├── bitcoin_test_2023_2024 copy.csv   # 测试集数据
-│   └── bitcoin_valid_2021_2022 copy.csv  # 验证集数据
-├── docs/                            # 文档文件夹
-│   ├── README.md                    # 项目说明文档
-│   ├── 策略对比报告.md               # 完整对比分析报告
-│   ├── 量化策略技术总结.md           # 量化策略技术细节
-│   └── DCA与HODL策略假设分析.md     # 基于代码的策略假设总结
-├── run.py                           # 项目入口点
-├── .gitignore                       # Git忽略配置
-└── README.md                        # 项目根目录说明
+├── src/                             # Source code folder
+│   ├── strategies/                  # Strategy implementations
+│   │   ├── __init__.py             # Strategy module init
+│   │   ├── hodl.py                 # HODL strategy implementation
+│   │   ├── dca.py                  # DCA strategy implementation (training)
+│   │   ├── dca_test.py             # DCA test set evaluation
+│   │   ├── quant_rf.py             # Quant strategy implementation (training)
+│   │   └── quant_test.py           # Quant test set evaluation
+│   ├── __init__.py                 # Package init
+│   ├── config.py                   # Global config (paths, params, constants)
+│   ├── metrics.py                  # Unified performance metrics calculation
+│   ├── utils.py                    # Common utility functions
+│   └── main.py                     # Main program (train + test + cross-validation)
+├── data/                            # Data folder
+│   ├── bitcoin_train_2010_2020 copy.csv  # Training set data
+│   ├── bitcoin_test_2023_2024 copy.csv   # Test set data
+│   └── bitcoin_valid_2021_2022 copy.csv  # Validation set data
+├── docs/                            # Documentation folder
+│   ├── README.md                    # Project documentation
+│   ├── strategy_comparison_report.md  # Complete comparison report
+│   ├── quantitative_strategy_summary.md # Quant strategy technical details
+│   └── dca_and_hodl_assumptions.md    # Strategy assumptions based on code
+├── run.py                           # Project entry point
+├── .gitignore                       # Git ignore config
+└── README.md                        # Root directory explanation
 ```
 
-### 代码架构设计
+### Code Architecture Design
 
-**模块化设计**:
-- `config.py`: 单一配置源，包含所有路径、参数和预训练权重
-- `metrics.py`: 统一的金融指标计算（Sharpe、Sortino、最大回撤等）
-- `utils.py`: 数据加载、格式化、显示等通用功能
-- `strategies/`: 策略实现模块，所有策略使用统一的配置和指标
+**Modular Design**:
+- `config.py`: Single source of configuration, containing all paths, parameters, and pre-trained weights.
+- `metrics.py`: Unified financial metric calculation (Sharpe, Sortino, Max Drawdown, etc.).
+- `utils.py`: Common functions for data loading, formatting, display, etc.
+- `strategies/`: Strategy implementation module, all strategies use unified configuration and metrics.
 
-**专业结构**:
-- `src/` 文件夹: 遵循 Python 最佳实践，所有源代码集中管理
-- `run.py`: 清晰的项目入口点，自动配置 Python 路径
-- 包初始化: 使用 `__init__.py` 建立正确的包结构
-│   ├── quant_rf.py                  # 量化策略（10因子+随机游走优化）
-│   └── quant_test.py                # 量化策略测试
-├── config.py                        # 全局配置文件
-├── metrics.py                       # 统一指标计算模块
-├── utils.py                         # 通用工具函数
-└── main.py                          # 主程序 - 运行所有策略并对比
-```
+**Professional Structure**:
+- `src/` folder: Follows Python best practices, centrally managing all source code.
+- `run.py`: Clear project entry point, automatically configuring Python path.
+- Package Initialization: Uses `__init__.py` to establish correct package structure.
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 环境要求
+### Requirements
 - Python 3.8+
 - pandas, numpy, scikit-learn
 
-## 🚀 快速开始
-
-### 环境要求
-- Python 3.8+
-- pandas, numpy, scikit-learn
-
-### 安装依赖
+### Install Dependencies
 ```bash
 pip install pandas numpy scikit-learn
 ```
 
-### 运行策略
+### Run Strategies
 
-**运行完整分析（推荐）**
+**Run Full Analysis (Recommended)**
 ```bash
 python run.py
 ```
 
-**输出内容**：
-1. 训练集评估（2010-2020）- 三种策略的开发阶段表现
-2. 测试集评估（2023-2024）- 验证策略的泛化能力
-3. 交叉验证分析 - 检测过拟合，对比训练vs测试表现
-4. 最终建议 - 基于完整分析的策略推荐
+**Output Content**:
+1. Training Set Evaluation (2010-2020) - Development phase performance of three strategies.
+2. Test Set Evaluation (2023-2024) - Validation of strategy generalization ability.
+3. Cross-Validation Analysis - Detecting overfitting, comparing training vs test performance.
+4. Final Recommendation - Strategy recommendation based on full analysis.
 
-**或直接运行主程序（等价）**
+**Or Run Main Program Directly (Equivalent)**
 ```bash
 python -m src.main
 ```
 
-**或单独运行每个策略模块：**
+**Or Run Each Strategy Module Separately:**
 
 ```bash
-# HODL策略（训练集）
+# HODL Strategy (Training)
 python -m src.strategies.hodl
 
-# DCA策略（训练集）
+# DCA Strategy (Training)
 python -m src.strategies.dca
 
-# DCA策略（测试集）
+# DCA Strategy (Test)
 python -m src.strategies.dca_test
 
-# 量化策略（训练集）
+# Quant Strategy (Training)
 python -m src.strategies.quant_rf
 
-# 量化策略（测试集）
+# Quant Strategy (Test)
 python -m src.strategies.quant_test
 ```
 
-## 📝 文档说明
+## 📝 Documentation Guide
 
-所有文档位于 `docs/` 文件夹中：
+All documentation is located in the `docs/` folder:
 
-### 1. 策略对比报告.md
-- 训练集与测试集详细表现对比
-- 过拟合问题深度分析
-- 投资建议与风险提示
+### 1. [strategy_comparison_report.md](docs/strategy_comparison_report.md)
+- Detailed specific performance comparison between training and test sets
+- In-depth analysis of overfitting issues
+- Investment advice and risk warnings
 
-### 2. 量化策略技术总结.md
-- 10个技术因子详细说明
-- 随机游走优化算法原理
-- 权重经济含义解读
-- 策略局限性与改进方向
+### 2. [quantitative_strategy_summary.md](docs/quantitative_strategy_summary.md)
+- Detailed explanation of 10 technical factors
+- Random walk optimization algorithm principle
+- Economic meaning interpretation of weights
+- Strategy limitations and improvement directions
 
-### 3. DCA与HODL策略假设分析.md
-- 基于代码实现提取的核心假设
-- 策略参数设定与经济逻辑
-- 共同假设与差异对比
+### 3. [dca_and_hodl_assumptions.md](docs/dca_and_hodl_assumptions.md)
+- Core assumptions extracted based on code implementation
+- Strategy parameter settings and economic logic
+- Common assumptions and difference comparison
 
-## 🔬 量化策略技术细节
+## 🔬 Quantitative Strategy Technical Details
 
-### 十大因子
-1. **动量**: MOM_20, MOM_60
-2. **均线价差**: MA_50_SPREAD, MA_90_SPREAD
-3. **波动率**: VOL_20, ATR_PCT_14, VOL_RATIO_20
-4. **价格位置**: PRICE_POS_60, CLOSE_POS
-5. **市场周期**: POST_HALVING
+### Ten Factors
+1. **Momentum**: MOM_20, MOM_60
+2. **MA Spread**: MA_50_SPREAD, MA_90_SPREAD
+3. **Volatility**: VOL_20, ATR_PCT_14, VOL_RATIO_20
+4. **Price Position**: PRICE_POS_60, CLOSE_POS
+5. **Market Cycle**: POST_HALVING
 
-### 优化方法
-- 随机游走搜索（300步迭代，保守优化）
-- 目标函数: 最大化Sharpe比率 - L2正则化惩罚(0.012)
-- 滚动Z-score标准化（90天窗口）
-- Sigmoid持仓映射（支持0-100%连续仓位）
-- 交易成本: 15 bps (0.15%)
+### Optimization Method
+- Random Walk Search (300 iterations, conservative optimization)
+- Objective Function: Maximize Sharpe Ratio - L2 Regularization Penalty (0.012)
+- Rolling Z-score Standardization (90-day window)
+- Sigmoid Position Mapping (Supports 0-100% continuous position)
+- Transaction Cost: 15 bps (0.15%)
 
-### 最终权重
+### Final Weights
 ```python
 [0.304, -1.871, 0.386, 0.368, -0.352, 1.320, 0.412, 2.561, 0.612, -0.793]
 ```
 
-### 因子权重分布
+### Factor Weight Distribution
 
-**前三重要因子** (按绝对值):
-1. **PRICE_POS_60 (60日价格位置)** - 权重: +2.561 (28.5%)
-   - 看多信号：价格越接近60日高点，越倾向满仓
+**Top Three Important Factors** (by absolute value):
+1. **PRICE_POS_60 (60-day Price Position)** - Weight: +2.561 (28.5%)
+   - Bull Signal: The closer the price is to the 60-day high, the more inclined to full position.
    
-2. **MOM_60 (60日动量)** - 权重: -1.871 (20.8%)
-   - 看空信号：反向动量策略，防止追高
+2. **MOM_60 (60-day Momentum)** - Weight: -1.871 (20.8%)
+   - Bear Signal: Reverse momentum strategy vs chasing highs.
    
-3. **ATR_PCT_14 (14日ATR)** - 权重: +1.320 (14.7%)
-   - 看多信号：波动率上升时增加仓位
+3. **ATR_PCT_14 (14-day ATR)** - Weight: +1.320 (14.7%)
+   - Bull Signal: Increase position when volatility rises.
 
-**权重分布统计**:
-- 看多因子 (正权重): 7个
-- 看空因子 (负权重): 3个
-- 策略倾向: 整体偏多头配置
+**Weight Distribution Statistics**:
+- Bull Factors (Positive Weight): 7
+- Bear Factors (Negative Weight): 3
+- Strategy Bias: Overall long configuration
 
-**各因子权重占比**:
-| 因子 | 权重 | 绝对值占比 | 方向 |
-|------|------|-----------|------|
-| PRICE_POS_60 | +2.561 | 28.5% | 看多 |
-| MOM_60 | -1.871 | 20.8% | 看空 |
-| ATR_PCT_14 | +1.320 | 14.7% | 看多 |
-| RSI_14 | -0.793 | 8.8% | 看空 |
-| CLOSE_POS | +0.612 | 6.8% | 看多 |
-| VOL_RATIO_20 | +0.412 | 4.6% | 看多 |
-| MA_50_SPREAD | +0.386 | 4.3% | 看多 |
-| MA_90_SPREAD | +0.368 | 4.1% | 看多 |
-| VOL_20 | -0.352 | 3.9% | 看空 |
-| MOM_20 | +0.304 | 3.4% | 看多 |
+**Factor Weight Ratios**:
+| Factor | Weight | Abs Value Share | Direction |
+|--------|--------|-----------------|-----------|
+| PRICE_POS_60 | +2.561 | 28.5% | Bull |
+| MOM_60 | -1.871 | 20.8% | Bear |
+| ATR_PCT_14 | +1.320 | 14.7% | Bull |
+| RSI_14 | -0.793 | 8.8% | Bear |
+| CLOSE_POS | +0.612 | 6.8% | Bull |
+| VOL_RATIO_20 | +0.412 | 4.6% | Bull |
+| MA_50_SPREAD | +0.386 | 4.3% | Bull |
+| MA_90_SPREAD | +0.368 | 4.1% | Bull |
+| VOL_20 | -0.352 | 3.9% | Bear |
+| MOM_20 | +0.304 | 3.4% | Bull |
 
-**权重解读**:
-- **价格位置主导**: PRICE_POS_60占比最高，表明策略主要依赖价格在历史区间的位置
-- **反向动量**: MOM_60为负权重，策略倾向于在动量过强时减仓
-- **波动率敏感**: ATR和VOL因子权重显著，策略对市场波动敏感
+**Weight Interpretation**:
+- **Price Position Dominance**: PRICE_POS_60 has the highest share, indicating the strategy mainly relies on price position within historical range.
+- **Reverse Momentum**: MOM_60 has negative weight, strategy tends to reduce position when momentum is too strong.
+- **Volatility Sensitivity**: ATR and VOL factors have significant weights, strategy is sensitive to market volatility.
 
-### 交易特征
-- **策略类型**: 高频交易（日均调仓）
-- **训练集年均交易**: 280次/年
-- **测试集年均交易**: 295次/年  
-- **平均持仓调整**: 14-16%
-- **换手率**: 极高（训练集40,417%，测试集4,883%）
+### Trading Characteristics
+- **Strategy Type**: High Frequency Trading (Daily rebalancing)
+- **Training Set Avg Trades**: 280/year
+- **Test Set Avg Trades**: 295/year
+- **Avg Position Adjustment**: 14-16%
+- **Turnover Rate**: Extremely high (Training set 40,417%, Test set 4,883%)
 
-## ⚠️ 风险提示
+## ⚠️ Risk Warning
 
-1. **过拟合风险**: 量化策略在测试集上Sharpe从1.98跌至1.08，表现显著下降
-2. **高频交易成本**: 年均280+次交易，交易成本对收益影响巨大
-3. **历史数据局限**: 过往表现不代表未来收益
-4. **市场风险**: 极端事件可能导致策略失效
-5. **技术风险**: 区块链技术和监管环境变化
+1. **Overfitting Risk**: Quant strategy Sharpe dropped from 1.98 to 1.08 in test set, significant performance decline.
+2. **High Frequency Costs**: 280+ trades/year, transaction costs have huge impact on returns.
+3. **Historical Data Limitations**: Past performance does not represent future returns.
+4. **Market Risk**: Extreme events may cause strategy failure.
+5. **Technical Risk**: Blockchain technology and regulatory environment changes.
 
-## 📊 核心指标
+## 📊 Core Metrics
 
-- **Sharpe Ratio**: 风险调整后收益
-- **Sortino Ratio**: 下行风险调整收益
-- **Max Drawdown**: 最大回撤
-- **无风险利率**: 3% (年化)
-- **资本成本**: 7% (HODL策略)
+- **Sharpe Ratio**: Risk-adjusted return
+- **Sortino Ratio**: Downside risk-adjusted return
+- **Max Drawdown**: Maximum loss from peak
+- **Risk-Free Rate**: 3% (Annualized)
+- **Capital Cost**: 7% (HODL strategy)
 
-## 💡 核心结论
+## 💡 Key Conclusion
 
-> 简单的DCA策略在长期表现和稳健性上显著优于过度优化的量化策略。
+> Simple DCA strategy significantly outperforms overly optimized quantitative strategies in long-term performance and robustness.
 
-在比特币投资中：
-- ✅ **DCA策略最优**: 训练集和测试集均表现稳健，风险调整收益最高
-- ✅ **HODL策略适合大资金**: 绝对收益高，但需承受更高波动
-- ⚠️ **量化策略需谨慎**: 高频交易成本高昂（年均280+次），过拟合风险显著
-- 📊 **交易成本关键**: 量化策略的40,000%+换手率使交易成本成为收益杀手
+In Bitcoin investment:
+- ✅ **DCA Strategy Optimal**: Robust performance in both training and test sets, highest risk-adjusted return.
+- ✅ **HODL Strategy for Large Capital**: High absolute return, but must withstand higher volatility.
+- ⚠️ **Quant Strategy Caution**: High frequency costs (280+ trades/year), significant overfitting risk.
+- 📊 **Transaction Costs Critical**: Quant strategy's 40,000%+ turnover makes transaction costs a profit killer.
 
-## 📚 参考资料
+## 📚 References
 
 - Bitcoin Historical Price Data (2010-2024)
 - Modern Portfolio Theory
 - Technical Analysis Indicators
 - Random Walk Optimization
 
-## 🤝 贡献
+## 🤝 Contribution
 
-欢迎提交Issue和Pull Request改进策略实现。
+Issues and Pull Requests are welcome to improve strategy implementation.
 
-## 📄 许可
+## 📄 License
 
 MIT License
 
 ---
 
-**免责声明**: 本项目仅供学术研究和教育用途，不构成投资建议。投资有风险，入市需谨慎。
+**Disclaimer**: This project is for academic research and educational purposes only and does not constitute investment advice. Investment involves risks, please be cautious.
